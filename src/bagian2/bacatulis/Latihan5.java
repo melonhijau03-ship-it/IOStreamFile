@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package bagian2.bacatulis;
 
-/**
- *
- * @author User
- */
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+
 public class Latihan5 {
+    public static void main(String[]args){
+        //parameter true berarti menambah(append) bukan menimpa
+        try (PrintWriter penulis = new PrintWriter(new FileWriter("mahasiswa.txt"))){
+            penulis.println("dewi");
+            penulis.println("eka");
+            System.out.println("dua nama baru ditambahkan tanpa menghapus data lama");
+        } catch (IOException e){
+            System.out.println("gagal menambah data     :" +e.getMessage());
+        }
+    }
     
 }
