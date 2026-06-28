@@ -1,4 +1,3 @@
-
 package bagian3.kontak;
 
 import java.io.BufferedReader;
@@ -9,59 +8,83 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BukuKontak {
-    //ArrayList yang menampung objek bertipe kontak
+    // ArrayList yang menampung objek bertipe Kontak
     private ArrayList<Kontak> daftar = new ArrayList<>();
     private String namaBerkas;
-    
-    public BukuKontak(String namaBerkas){
+
+    public BukuKontak(String namaBerkas) {
         this.namaBerkas = namaBerkas;
-        
     }
-    //menambah kontak kekoleksi
-    public void tambahKontak(Kontak Kontak){
-        daftar.add(Kontak);
+
+    // Menambah satu kontak ke koleksi
+    public void tambahKontak(Kontak kontak) {
+        daftar.add(kontak);
     }
-    
-    //menampilkan seluruh koleksi beserta nomor urut
-    public void tampilkanSemua(){
+
+    // Menampilkan seluruh koleksi beserta nomor urut
+    public void tampilkanSemua() {
         System.out.println("== Daftar Kontak ==");
-        for (int i = 0; 1<daftar.size(); i++){
+        for (int i = 0; i < daftar.size(); i++) {
             Kontak k = daftar.get(i);
-            System.out.println((i + 1) + "." + k.info());
+            System.out.println((i + 1) + ". " + k.info());
         }
     }
-    
-    //menyembunyikan seluruh kontak ke berkas, satu kontak per baris
-    
-    public void simpanKeBerkas(){
-        try(PrintWriter penulis = new PrintWriter(new FileWriter(namaBerkas))){
-            for (Kontak k : daftar){
+
+    // Menyimpan seluruh kontak ke berkas, satu kontak per baris
+    public void simpanKeBerkas() {
+        try (PrintWriter penulis = new PrintWriter(new FileWriter(namaBerkas))) {
+            for (Kontak k : daftar) {
                 penulis.println(k.keBaris());
             }
-            System.out.println("Kontak di simpan ke     :" + namaBerkas);
-        } catch(IOException e){
-            System.out.println("Gagal menyimpan     :" + e.getMessage());
+            System.out.println("Kontak disimpan ke " + namaBerkas);
+        } catch (IOException e) {
+            System.out.println("Gagal menyimpan: " + e.getMessage());
         }
     }
-    
-    //menambah kembali kontak dari berkas ke dalam arraylist
-    public void muatDariBerkas(){
+
+    // Membaca kembali kontak dari berkas ke dalam ArrayList
+    // Latihan Mandiri No. 2 - disesuaikan memecah baris menjadi tiga bagian
+    public void muatDariBerkas() {
         daftar.clear();
-        try (BufferedReader pembaca = new BufferedReader(new FileReader(namaBerkas))){
+        try (BufferedReader pembaca = new BufferedReader(new FileReader(namaBerkas))) {
             String baris;
-            while((baris = pembaca.readLine()) != null){
+            while ((baris = pembaca.readLine()) != null) {
                 String[] bagian = baris.split(";");
-                if (bagian.length == 2){
-                    daftar.add(new Kontak(bagian[0], bagian[1]));
+                if (bagian.length == 3) {
+                    daftar.add(new Kontak(bagian[0], bagian[1], bagian[2]));
                 }
             }
             System.out.println("Kontak dimuat dari " + namaBerkas);
-        }catch (IOException e){
-            System.out.println("Gagal Memuat        :" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Gagal memuat: " + e.getMessage());
         }
     }
-    
-    public int jumlahKontak(){
+
+    // Latihan Mandiri No. 1 - method cariKontak
+    public void cariKontak(String nama) {
+        for (Kontak k : daftar) {
+            if (k.getNama().equals(nama)) {
+                System.out.println("Ditemukan: " + k.info());
+                return;
+            }
+        }
+        System.out.println("Kontak " + nama + " tidak ditemukan.");
+    }
+
+    // Latihan Mandiri No. 3 - method hapusKontak
+    public void hapusKontak(String nama) {
+        for (Kontak k : daftar) {
+            if (k.getNama().equals(nama)) {
+                daftar.remove(k);
+                System.out.println("Kontak " + nama + " berhasil dihapus.");
+                simpanKeBerkas(); // simpan perubahan ke berkas
+                return;
+            }
+        }
+        System.out.println("Kontak " + nama + " tidak ditemukan.");
+    }
+
+    public int jumlahKontak() {
         return daftar.size();
     }
 }

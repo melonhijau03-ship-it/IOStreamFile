@@ -3,33 +3,41 @@ package bagian3.kontak;
 
 
 public class Kontak {
-    //atribut: data yang dimiliki setiap kontak
+    // Atribut: data yang dimiliki setiap kontak
     private String nama;
     private String nomor;
-    
-    //construktor : dipanggil saat objek dibuat
-    public Kontak(String nama, String nomor){
+    private String email; // Latihan Mandiri No. 2 - tambah atribut email
+
+    // Constructor: dipanggil saat objek dibuat
+    public Kontak(String nama, String nomor, String email) {
         this.nama = nama;
         this.nomor = nomor;
+        this.email = email;
     }
-    //getter: cara membaca atribut dari kluar class
-    public String getNama(){
+
+    // Getter: cara membaca atribut dari luar class
+    public String getNama() {
         return nama;
     }
-    
-    public String getNomor(){
+
+    public String getNomor() {
         return nomor;
     }
-    
-    //mengubah objek menjadi satu baris teks untuk disimpan ke berkas
-    public String keBaris(){
-        return nama + ";" + nomor;
-        
+
+    // Latihan Mandiri No. 2 - getter email
+    public String getEmail() {
+        return email;
     }
-    
-    //mengembalikan keterangan kontak dalam bentuk teks
-    public String info(){
-        return nama + "-"+nomor;
+
+    // Mengubah objek menjadi satu baris teks untuk disimpan ke berkas
+    // Latihan Mandiri No. 2 - disesuaikan jadi 3 bagian
+    public String keBaris() {
+        return nama + ";" + nomor + ";" + email;
     }
-    
+
+    // Mengembalikan keterangan kontak dalam bentuk teks
+    // Latihan Mandiri No. 2 - disesuaikan tampilkan email juga
+    public String info() {
+        return nama + " - " + nomor + " - " + email;
+    }
 }
