@@ -1,0 +1,5 @@
+Beras 5kg;65000.0;20
+Minyak Goreng 1L;18000.0;35
+Buku Tulis;4500.0;100
+Pulpen;2500.0;150
+Air Mineral 600ml;3000.0;200
